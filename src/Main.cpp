@@ -1,13 +1,15 @@
 #include "Application.h"
+#include "Window.h"
+#include <SFML/Graphics.hpp>
 
 int main() {
 
-    Application application;
+    Application app;
 
-    while (application.isRunning()) {
+    while (app.isRunning()) {
        
         //Input System, Renderer System, Sound System etc.
-        //application.processSystems(); 
+        app.processSystems(); 
 
     }
 

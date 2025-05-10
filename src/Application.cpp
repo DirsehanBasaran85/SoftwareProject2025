@@ -1,47 +1,45 @@
 #include "Application.h"
+#include "Window.h"
 
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
+Application::Application()
+    : running(true), window(nullptr) {
+    initializeSystems();
+}
 
-Application::Application() {
-	
-    running = true;
+Application::~Application() {
 
-	//Code below must be moved to the Window and be taken care of there
-	//it is here to showcase the sfml library
+}
 
-        // Create the main window
-        sf::RenderWindow window(sf::VideoMode({ 1200, 800 }), "Test");
-
-    // Start the game loop
-    while (window.isOpen())
-    {
-        // Process events
-        while (const std::optional event = window.pollEvent())
-        {
-            // Close window: exit
-            if (event->is<sf::Event::Closed>())
-                window.close();
-                shutdown();
-        }
-
-        // Clear screen
-        window.clear();
-
-        // Update the window
-        window.display();
+void Application::initializeWindow(unsigned int width, unsigned int height, const std::string& title) {
+    if (!window) {  
+        window = std::make_unique<Window>(width, height, title); 
+        window->run();  
     }
+}
 
+void Application::initializeSystems() {
+
+    initializeWindow(1200, 800, "Test");
+    //initializeRenderer() etc.
+
+}
+
+void Application::processSystems() {
+    if (window && window->isOpen()) {
+        
+    }
+    else {
+        shutdown();
+    }
 }
 
 void Application::shutdown() {
-
     running = false;
-
+    if (window && window->isOpen()) {
+        window->close(); 
+    }
 }
 
 bool Application::isRunning() {
-	
     return running;
-
 }
