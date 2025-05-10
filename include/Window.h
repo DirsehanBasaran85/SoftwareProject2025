@@ -10,7 +10,7 @@ class Window {
 
 public:
 
-    Window(unsigned int width = 800, unsigned int height = 600, const std::string& title = "Default Window");
+    Window(unsigned int width = 800, unsigned int height = 600, const std::string& title = "Default");
     
     void run();
 
