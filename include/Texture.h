@@ -3,8 +3,12 @@
 #include <filesystem>
 #include <SFML/Graphics.hpp>
 
+//Wrapper for sf::texture
+
 class Texture {
+
 public:
+    
     Texture();
     ~Texture();
 
@@ -23,8 +27,8 @@ public:
         bool sRgb = false
     );
 
-    const sf::Texture& getRaw();
-
+    const sf::Texture& getRaw() const;
 private:
+
     sf::Texture texture;
 };

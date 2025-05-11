@@ -10,7 +10,6 @@ int main() {
        
         //Input System, Renderer System, Sound System etc.
         app.processSystems(); 
-
     }
 
     return 0;

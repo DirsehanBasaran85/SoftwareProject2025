@@ -7,6 +7,10 @@ Window::Window(unsigned int width, unsigned int height , const std::string& titl
     createWindow();
 }
 
+Window::~Window() {
+
+}
+
 void Window::run() {
     
     windowLoop();

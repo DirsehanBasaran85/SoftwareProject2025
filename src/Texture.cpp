@@ -9,26 +9,32 @@ Texture::~Texture() {
 }
 
 sf::Vector2u Texture::getSize() const {
+    
     return texture.getSize();
 }
 
 bool Texture::isRepeated() const {
+    
     return texture.isRepeated();
 }
 
 bool Texture::isSmooth() const {
+    
     return texture.isSmooth();
 }
 
 bool Texture::isSrgb() const {
+    
     return texture.isSrgb();
 }
 
 void Texture::setRepeated(bool state) {
+   
     texture.setRepeated(state);
 }
 
 void Texture::setSmoothness(bool state) {
+    
     texture.setSmooth(state);
 }
 
@@ -39,12 +45,14 @@ void Texture::loadFromFile(
     bool sRgb
 ) {
     
-    if (texture.loadFromFile(filename.string())) {
-        texture.setRepeated(false);  
-        texture.setSmooth(false);    
+    if (!texture.loadFromFile(filename.string())) {
+        //Error handling here  
     }
+    texture.setRepeated(false);
+    texture.setSmooth(false);
 }
 
-const sf::Texture& Texture::getRaw() {
+const sf::Texture& Texture::getRaw() const {
+    
     return texture;
 }
