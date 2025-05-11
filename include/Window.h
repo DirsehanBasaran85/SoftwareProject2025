@@ -4,8 +4,6 @@
 #include <iostream>
 #include <optional>
 
-#include <imgui.h>
-#include <imgui-SFML.h>
 #include <SFML/Graphics.hpp>
 
 class Window {
@@ -13,7 +11,6 @@ class Window {
 public:
 
     Window(unsigned int width = 800, unsigned int height = 600, const std::string& title = "Default");
-    ~Window();
     
     void run();
 
@@ -25,7 +22,6 @@ public:
 private:
 
     sf::RenderWindow window;
-    sf::Clock        deltaClock{}; // for ImGui::SFML::Update
     
     unsigned int width;
     unsigned int height;

@@ -5,14 +5,9 @@
 
 #include "Window.h"
 
-//Core of the program controls System initialization and how Systems are processed
-//Systems are Window, Renderer etc.
-
-
 class Application {
 
 public:
-
     Application();
     ~Application();
 
@@ -21,8 +16,8 @@ public:
     void processSystems();
     void shutdown();
     bool isRunning();
-private:
 
+private:
     bool running;
-    std::unique_ptr<Window> window;
+    std::unique_ptr<Window> window;  
 };
