@@ -12,10 +12,6 @@ Window::~Window() {
     ImGui::SFML::Shutdown();  //clean on exit
 }
 
-Window::~Window() {
-
-}
-
 void Window::run() {
 
     windowLoop();

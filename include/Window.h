@@ -10,8 +10,6 @@
 
 //System that handles window operations and also event handling later
 
-//System that handles window operations and also event handling later
-
 class Window {
 
 public:
