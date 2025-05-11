@@ -10,10 +10,12 @@
 
 //System that handles window operations and also event handling later
 
+//System that handles window operations and also event handling later
+
 class Window {
 
 public:
-
+   
     Window(unsigned int width = 800, unsigned int height = 600, const std::string& title = "Default");
     ~Window();
 
@@ -24,7 +26,7 @@ public:
     inline void display() { window.display(); }
     inline void close() { window.close(); }
 private:
-
+    
     sf::RenderWindow window;
     sf::Clock        deltaClock{}; // for imgui::sfml::update
 

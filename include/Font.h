@@ -7,7 +7,7 @@
 
 class Font {
 public:
-
+   
     Font();
     ~Font();
 
@@ -15,6 +15,6 @@ public:
 
     const sf::Font& getRaw() const;
 private:
-
+    
     sf::Font font;
 };
