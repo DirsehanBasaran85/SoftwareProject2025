@@ -6,10 +6,11 @@ Window::Window(unsigned int width, unsigned int height , const std::string& titl
     : width(width), height(height), title(title), scene({width,height}), assetManager(100), renderer(window, assetManager, scene)
 {
     createWindow();
+    ImGui::SFML::Init(window); // init imgui
 }
 
 Window::~Window() {
-
+    ImGui::SFML::Shutdown(); // clean up
 }
 
 void Window::run() {
@@ -25,7 +26,8 @@ void Window::run() {
 
 void Window::createWindow() {
    
-    window.create(sf::VideoMode({ width, height }), title);
+    window.create(sf::VideoMode({ width, height }), title,sf::Style::Titlebar | sf::Style::Close);
+    window.setVerticalSyncEnabled(true);
 }
 
 void Window::windowLoop() {
@@ -34,6 +36,7 @@ void Window::windowLoop() {
     {
         while (const std::optional event = window.pollEvent())
         {
+            ImGui::SFML::ProcessEvent(window, *event); // feed imgui
             
             if (event->is<sf::Event::Closed>())
                 close();
@@ -78,10 +81,12 @@ void Window::windowLoop() {
                     
             }
         }
-        
 
+       
 
         renderer.render();
+
+       
 
     }
 }

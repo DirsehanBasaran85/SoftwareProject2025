@@ -3,10 +3,21 @@
 
 Renderer::Renderer(sf::RenderWindow& window, AssetManager& assetManager, Scene& scene)
     : window(window), assetManager(assetManager), scene(scene) {
+    
+}
 
+Renderer::~Renderer() {
 }
 
 void Renderer::render() {
+
+    ImGui::SFML::Update(window, deltaClock.restart()); // new imgui frame
+
+
+    // builds imgui stats window
+    ImGui::Begin("Stats");
+    ImGui::Text("FPS: %.1f", ImGui::GetIO().Framerate);
+    ImGui::End();
     
     scene.clear();
 
@@ -28,7 +39,10 @@ void Renderer::render() {
     scene.display();  
     window.clear(); 
     sf::Sprite sceneSprite(scene.getRaw().getTexture());  
-    window.draw(sceneSprite);  
+    window.draw(sceneSprite);
+
+    ImGui::SFML::Render(window); // render imgui on top
+
     window.display(); 
 }
 

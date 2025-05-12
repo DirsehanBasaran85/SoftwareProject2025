@@ -26,7 +26,7 @@ public:
 private:
     
     sf::RenderWindow window;
-    
+
     unsigned int width;
     unsigned int height;
     const std::string title;
