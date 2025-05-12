@@ -6,11 +6,13 @@ Window::Window(unsigned int width, unsigned int height , const std::string& titl
     : width(width), height(height), title(title), scene({width,height}), assetManager(100), renderer(window, assetManager, scene)
 {
     createWindow();
-    ImGui::SFML::Init(window); // init imgui
+    if (!ImGui::SFML::Init(window)) { // init imgui
+        std::cout << "ImGui failed to start";
+    }
 }
 
 Window::~Window() {
-    ImGui::SFML::Shutdown(); // clean up
+   ImGui::SFML::Shutdown(); // clean up
 }
 
 void Window::run() {

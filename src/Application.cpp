@@ -2,32 +2,20 @@
 #include "Window.h"
 
 Application::Application()
-    : running(true), window(nullptr) {
+    : running(true), window(1200,800,"test") {
    
-    initializeSystems();
+    window.run();
 }
 
 Application::~Application() {
 
 }
 
-void Application::initializeWindow(unsigned int width, unsigned int height, const std::string& title) {
-    
-    if (!window) {  
-        window = std::make_unique<Window>(width, height, title); 
-        window->run();  
-    }
-}
-
-void Application::initializeSystems() {
-
-    initializeWindow(1200, 800, "Test");
-}
 
 void Application::processSystems() {
     
-    if (window && window->isOpen()) {
-        
+    if (window.isOpen()) {
+        //game related stuff goes here
     }
     else {
         shutdown();
@@ -37,8 +25,8 @@ void Application::processSystems() {
 void Application::shutdown() {
     
     running = false;
-    if (window && window->isOpen()) {
-        window->close(); 
+    if (window.isOpen()) {
+        window.close(); 
     }
 }
 
