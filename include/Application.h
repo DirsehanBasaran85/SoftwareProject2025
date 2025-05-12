@@ -12,7 +12,6 @@
 class Application {
 
 public:
-   
     Application();
     ~Application();
 
@@ -21,8 +20,8 @@ public:
     void processSystems();
     void shutdown();
     bool isRunning();
+
 private:
-    
     bool running;
-    std::unique_ptr<Window> window;  
+    std::unique_ptr<Window> window;
 };
