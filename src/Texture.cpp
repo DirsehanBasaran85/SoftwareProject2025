@@ -38,7 +38,7 @@ void Texture::setSmoothness(bool state) {
     texture.setSmooth(state);
 }
 
-void Texture::loadFromFile(
+bool Texture::loadFromFile(
     const std::filesystem::path& filename,
     sf::Vector2u position,
     sf::Vector2u size,
@@ -46,10 +46,11 @@ void Texture::loadFromFile(
 ) {
     
     if (!texture.loadFromFile(filename.string())) {
-        //Error handling here  
+        return false;
     }
     texture.setRepeated(false);
     texture.setSmooth(false);
+    return true;
 }
 
 const sf::Texture& Texture::getRaw() const {

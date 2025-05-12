@@ -8,10 +8,10 @@ class Sprite {
 
 public:
     
-    Sprite(const sf::Texture& texture);
+    Sprite(const sf::Texture& texture, sf::Vector2u position = { 0, 0 }, sf::Vector2u size = { 0, 0 });
     ~Sprite();
 
-    void setTexture(const sf::Texture& texture);
+    void setTexture(const sf::Texture& texture, sf::Vector2u position = { 0, 0 }, sf::Vector2u size = { 0, 0 });
 
     sf::Vector2u getSize() const;
 

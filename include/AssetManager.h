@@ -13,7 +13,7 @@
 
 //load textures --> assign textures to sprites --> render sprites!
 //load fonts --> render fonts!
-//use get functions to with the textures/sprites name to get whichever texture/sprite you want to use!
+//use get functions with the textures/sprites/font name to get whichever texture/sprite/font you want to use!
 
 
 class AssetManager {
@@ -26,7 +26,8 @@ public:
         sf::Vector2u position = { 0, 0 }, sf::Vector2u size = { 0, 0 }, bool sRgb = false);
     Texture& getTexture(const std::string& name);
 
-    void loadSprite(const std::string& name, const Texture& texture);
+    void loadSprite(const std::string& name, const Texture& texture,
+        sf::Vector2u position = { 0, 0 }, sf::Vector2u size = { 0, 0 });
     Sprite& getSprite(const std::string& name);
 
     void loadFont(const std::string& name, const std::filesystem::path& filename);

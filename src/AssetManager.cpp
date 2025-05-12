@@ -1,4 +1,6 @@
 #include "AssetManager.h"
+#include <iostream>
+
 
 AssetManager::AssetManager(std::size_t initialCapacity) {
     
@@ -11,9 +13,12 @@ void AssetManager::loadTexture(const std::string& name, const std::filesystem::p
     sf::Vector2u position, sf::Vector2u size, bool sRgb) {
 
     Texture texture;
-    texture.loadFromFile(filename, position, size, sRgb);
+    if (!texture.loadFromFile(filename, position, size, sRgb)) {
+        std::cerr << "Failed to load texture: " << filename << "\n";
+    };
     textures.push_back(texture);  
     textureNameToIndex[name] = textures.size() - 1; 
+
 }
 
 Texture& AssetManager::getTexture(const std::string& name) {
@@ -21,9 +26,11 @@ Texture& AssetManager::getTexture(const std::string& name) {
     return textures[textureNameToIndex.at(name)];
 }
 
-void AssetManager::loadSprite(const std::string& name, const Texture& texture) {
+void AssetManager::loadSprite(const std::string& name, const Texture& texture,
+    sf::Vector2u position, sf::Vector2u size) {
     
-    sprites.emplace_back(texture.getRaw());;
+    Sprite sprite(texture.getRaw(), position, size);
+    sprites.push_back(sprite);
     spriteNameToIndex[name] = sprites.size() - 1;
 }
 

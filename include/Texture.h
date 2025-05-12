@@ -20,7 +20,7 @@ public:
     void setRepeated(bool state);
     void setSmoothness(bool state);
 
-    void loadFromFile(
+    bool loadFromFile(
         const std::filesystem::path& filename,
         sf::Vector2u position = { 0, 0 },
         sf::Vector2u size = { 0, 0 },

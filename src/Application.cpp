@@ -22,7 +22,6 @@ void Application::initializeWindow(unsigned int width, unsigned int height, cons
 void Application::initializeSystems() {
 
     initializeWindow(1200, 800, "Test");
-    //initializeRenderer() etc.
 }
 
 void Application::processSystems() {

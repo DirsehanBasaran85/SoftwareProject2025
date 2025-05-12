@@ -1,16 +1,18 @@
 #include "Sprite.h"
 
-Sprite::Sprite(const sf::Texture& texture) : sprite(texture) {
- 
+Sprite::Sprite(const sf::Texture& texture, sf::Vector2u position, sf::Vector2u size) : sprite(texture) {
+    
+    setTexture(texture, position, size);
 }
 
 Sprite::~Sprite() {
 
 }
 
-void Sprite::setTexture(const sf::Texture& texture) {
+void Sprite::setTexture(const sf::Texture& texture, sf::Vector2u position, sf::Vector2u size) {
     
     sprite.setTexture(texture);
+    sprite.setTextureRect(sf::IntRect({ static_cast<int>(position.x),static_cast<int>(position.y)}, { static_cast<int>(size.x), static_cast<int>(size.y)}));
 }
 
 sf::Vector2u Sprite::getSize() const {
