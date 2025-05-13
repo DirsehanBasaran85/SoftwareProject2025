@@ -14,6 +14,7 @@ public:
     Renderer(sf::RenderWindow& window, AssetManager& assetManager, Scene& scene);
     ~Renderer();
 
+    void renderToScene();
     void render();
     DebugMenu& getDebugMenu();
     

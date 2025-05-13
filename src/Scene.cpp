@@ -7,6 +7,10 @@ Scene::Scene(sf::Vector2u size) : scene(size) {
 
 Scene::~Scene() {}
 
+const sf::Texture& Scene::getScene() {
+    return scene.getTexture();
+}
+
 sf::Vector2u Scene::getSize() const {
 
     return scene.getSize();
