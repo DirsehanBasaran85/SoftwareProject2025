@@ -20,11 +20,11 @@ public:
     AssetManager(std::size_t initialCapacity = 100);
 
     void loadTexture(const std::string& name, const std::filesystem::path& filename,
-        sf::Vector2u position = { 0, 0 }, sf::Vector2u size = { 0, 0 }, bool sRgb = false);
-
+    sf::Vector2u position = { 0, 0 }, sf::Vector2u size = { 0, 0 }, bool sRgb = false);
     Texture& getTexture(const std::string& name);
 
-    void loadSprite(const std::string& name, const Texture& texture);
+    void loadSprite(const std::string& name, const Texture& texture,
+    sf::Vector2u position = { 0, 0 }, sf::Vector2u size = { 0, 0 });
     Sprite& getSprite(const std::string& name);
 
     void loadFont(const std::string& name, const std::filesystem::path& filename);
