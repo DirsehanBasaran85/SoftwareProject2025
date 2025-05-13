@@ -15,7 +15,8 @@ public:
 
     Scene(sf::Vector2u size);
     ~Scene();
-    
+
+    const sf::Texture& getScene() ;
     sf::Vector2u getSize() const;
     void clear();
     void draw(const sf::Drawable& drawable);
