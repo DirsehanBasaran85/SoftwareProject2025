@@ -36,7 +36,7 @@ set(IMGUI_SFML_SOURCES
 file(GLOB_RECURSE SOURCE_FILES "src/*.cpp")
 
 # Executable
-add_executable(${PROJECT_NAME} "src/Main.cpp")
+add_executable(${PROJECT_NAME} "src/Main.cpp" "src/DebugMenu.cpp" "include/DebugMenu.h")
 
 # Add All Sources
 target_sources(${PROJECT_NAME} PRIVATE

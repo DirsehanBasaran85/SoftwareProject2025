@@ -25,40 +25,66 @@ void Scene::display() {
 
     scene.display();
 }
-
-void Scene::addEntity(const std::string& entityName) {
-
-    entities.emplace(entityName, Entity{ sf::Vector2f(0, 0) });
+void Scene::update() {
+    entityManager.Update();
 }
 
-void Scene::addEntity(const std::string& entityName, sf::Vector2f position) {
+EntityPtr Scene::addEntity(const std::string& tag) {
+    auto e = entityManager.addEntity(tag);
+    return e;
 
-    entities.emplace(entityName, Entity{ position });
 }
 
-void Scene::removeEntity(const std::string& entityName) {
-
-    entities.erase(entityName);
+EntityPtr Scene::addEntity(const std::string& tag, sf::Vector2f position) { // initialize an entity with no velocity (local player ?)
+    sf::Vector2f velocity = { 0.0f,0.0f };
+    float angle = 0.0f;
+    auto e = entityManager.addEntity(tag);
+    e->transformComponent = std::make_shared<TransformComponent>(position,velocity,angle); // be careful here if its null game crashes, should probably check or make more secure
+    return e;
 }
 
-void Scene::setPosition(const std::string& entityName, sf::Vector2f position) {
+void Scene::removeEntity(const std::string& tag) {
 
-    auto it = entities.find(entityName);
-    if (it == entities.end()) {
-
-        throw std::runtime_error("Entity '" + entityName + "' not found.");
+    auto& entityvec = entityManager.getEntities();
+    for (auto e : entityvec)
+    {
+        if (e->getTag() == tag)
+        {
+            e->Deactivate();
+        }
     }
-    it->second.position = position;
 }
 
-sf::Vector2f Scene::getPosition(const std::string& entityName) const {
+void Scene::setPosition(const std::string& tag, sf::Vector2f position) { // this should only work for local player
 
-    auto it = entities.find(entityName);
-    if (it == entities.end()) {
-
-        throw std::runtime_error("Entity '" + entityName + "' not found.");
+    auto& entityvector = entityManager.getEntities();
+    for (auto e : entityvector)
+    {
+        if (e->getTag() == tag)
+        {
+            e->transformComponent->position = position;
+        }
     }
-    return it->second.position;
+}
+
+sf::Vector2f Scene::getPosition(const std::string& tag)  {
+    bool found = 0;
+    sf::Vector2f res;
+    auto& entityvec = entityManager.getEntities();
+    for (auto e : entityvec)
+    {
+        if (e->getTag() == tag)
+        {
+            found = true;
+            res= e->transformComponent->position;
+        }
+    }
+    if (found) { 
+        return res; 
+    }
+    else {
+        throw std::runtime_error("Entity '" + tag + "' not found.");
+    }
 }
 
 const sf::RenderTexture& Scene::getRaw() const {
@@ -66,7 +92,7 @@ const sf::RenderTexture& Scene::getRaw() const {
     return scene;
 }
 
-const std::unordered_map<std::string, Scene::Entity>& Scene::getEntities() const {
+EntityVec& Scene::getEntities() {
 
-    return entities;
+    return entityManager.getEntities();
 }

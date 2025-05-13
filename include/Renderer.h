@@ -1,9 +1,9 @@
 #pragma once
 
+#include "DebugMenu.h"
 #include "AssetManager.h"
 #include "Scene.h"
-#include <imgui.h>
-#include <imgui-SFML.h>
+
 
 //create scene --> draw sprites to scene --> draw scene to window --> Hurray!
 
@@ -15,10 +15,11 @@ public:
     ~Renderer();
 
     void render();
+    DebugMenu& getDebugMenu();
+    
 private:
-
-    sf::Clock        deltaClock{}; // for imgui::sfml::update
     sf::RenderWindow& window;
     AssetManager& assetManager;
     Scene& scene;
+    DebugMenu debugMenu;
 };
