@@ -7,8 +7,6 @@
 
 //Core of the program controls System initialization and how Systems are processed
 
-
-
 class Application {
 
 public:
