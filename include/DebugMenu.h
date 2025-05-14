@@ -21,6 +21,7 @@ public:
 	DebugMenu& operator=(const DebugMenu&) = delete;
 
 	bool IsMenuActive = true;
+	bool showCollisions = true;
 	bool Init(sf::RenderWindow* _window);
 	void Update(Scene& scene);
 	void Render();
