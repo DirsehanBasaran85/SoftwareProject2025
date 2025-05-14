@@ -1,5 +1,9 @@
 #pragma once
+<<<<<<<< HEAD:game/Component.h
 #include "ComponentBase.h"
+========
+#include "Component.h"
+>>>>>>>> 428ed0e8a2b309c89bb2b011bdc07fe74421a3c0:game/Components.h
 
 // for position, velocity, angle
 class TransformComponent : public Component {
