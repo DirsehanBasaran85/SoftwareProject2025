@@ -25,6 +25,13 @@ void Window::run() {
     scene.addEntity("apple", { 570,400 });
 
     scene.update();
+
+    // Bind actions
+    input.bindAction("MoveUp", { InputType::Keyboard, {.key = sf::Keyboard::Scan::Up} });
+    input.bindAction("MoveDown", { InputType::Keyboard, {.key = sf::Keyboard::Scan::Down} });
+    input.bindAction("MoveRight", { InputType::Keyboard, {.key = sf::Keyboard::Scan::Right} });
+    input.bindAction("MoveLeft", { InputType::Keyboard, {.key = sf::Keyboard::Scan::Left} });
+
     windowLoop();
 }
 
@@ -34,63 +41,54 @@ void Window::createWindow() {
     window.setVerticalSyncEnabled(true);
 }
 
+void Window::checkInput() {
+
+    if (input.isActionDown("MoveUp")) {
+        sf::Vector2f coordinates = scene.getPosition("apple");
+        coordinates.y -= 1;
+        scene.setPosition("apple", coordinates);
+    }
+
+    if (input.isActionDown("MoveDown")) {
+        sf::Vector2f coordinates = scene.getPosition("apple");
+        coordinates.y += 1;
+        scene.setPosition("apple", coordinates);
+    }
+
+    if (input.isActionDown("MoveRight")) {
+        sf::Vector2f coordinates = scene.getPosition("apple");
+        coordinates.x += 1;
+        scene.setPosition("apple", coordinates);
+    }
+
+    if (input.isActionDown("MoveLeft")) {
+        sf::Vector2f coordinates = scene.getPosition("apple");
+        coordinates.x -= 1;
+        scene.setPosition("apple", coordinates);
+    }
+
+}
+
 void Window::windowLoop() {
 
     while (isOpen())
     {
+
+        input.beginFrame();
         while (const std::optional event = window.pollEvent())
         {
             renderer.getDebugMenu().ProcessEvent(*event); // feed imgui
 
             if (event->is<sf::Event::Closed>())
                 close();
-            else if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>())
-            {
+            
+            input.update(*event);
+            // Check actions
 
-                if (keyPressed->scancode == sf::Keyboard::Scancode::Escape) {
-
-                    //window.close();
-                    sf::Vector2f debugtest = scene.getPosition("apple");
-                    std::cout << debugtest.x << std::endl;
-                    std::cout << debugtest.y << std::endl;
-                }
-
-                if (keyPressed->scancode == sf::Keyboard::Scancode::Up) {
-
-                    sf::Vector2f coordinates = scene.getPosition("apple");
-                    coordinates.y -= 10;
-                    scene.setPosition("apple", coordinates);
-                }
-
-                if (keyPressed->scancode == sf::Keyboard::Scancode::Down) {
-
-                    sf::Vector2f coordinates = scene.getPosition("apple");
-                    coordinates.y += 10;
-                    scene.setPosition("apple", coordinates);
-                }
-
-                if (keyPressed->scancode == sf::Keyboard::Scancode::Left) {
-
-                    sf::Vector2f coordinates = scene.getPosition("apple");
-                    coordinates.x -= 10;
-                    scene.setPosition("apple", coordinates);
-                }
-
-                if (keyPressed->scancode == sf::Keyboard::Scancode::Right) {
-
-                    sf::Vector2f coordinates = scene.getPosition("apple");
-                    coordinates.x += 10;
-                    scene.setPosition("apple", coordinates);
-                }
-
-            }
         }
 
-
+        checkInput();
 
         renderer.render();
-
-
-
     }
 }

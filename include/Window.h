@@ -7,6 +7,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Renderer.h"
+#include "InputManager.h"
 
 //System that handles window operations and also event handling later
 
@@ -31,10 +32,12 @@ private:
     unsigned int height;
     const std::string title;
     
+    InputManager input;
     AssetManager assetManager;
     Scene scene;
     Renderer renderer;
 
     void createWindow();
+    void checkInput();
     void windowLoop();
 };
