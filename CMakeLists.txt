@@ -9,6 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED YES)
 
 # Directories
 set(INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
+set(GAME_DIR ${PROJECT_SOURCE_DIR}/game)
 set(ASSETS_DIR ${PROJECT_SOURCE_DIR}/assets)
 set(SFML_DIR ${PROJECT_SOURCE_DIR}/thirdparty/SFML-3.0.0/lib/cmake/SFML)
 set(Ogg_DIR ${PROJECT_SOURCE_DIR}/thirdparty/SFML-3.0.0/lib/cmake/Ogg)
@@ -48,6 +49,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 # Include Paths
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${INCLUDE_DIR}
+    ${GAME_DIR}
     ${IMGUI_DIR}
     ${IMGUI_SFML_DIR}
 )
