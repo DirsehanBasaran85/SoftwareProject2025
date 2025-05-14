@@ -5,7 +5,7 @@
 #include "Components.h"
 
 
-using ComponentTuple = std::tuple<
+using ComponentTable = std::tuple<
 	TransformComponent,
 	CollisionComponent,
 	LifespanComponent
@@ -14,11 +14,23 @@ using ComponentTuple = std::tuple<
 class Entity {
 public:
 
+	template <typename T>
+	bool hasComponent() { return getComponent<T>().exists; }
 
+	template <typename T, typename... TArgs>
+	T& addComponent(TArgs&&...mArgs)
+	{
+		auto& component = getComponent<T>();
+		component = T(std::forward<TArgs>(mArgs)...);
+		component.exists = true;
+		return component;
+	}
 
-	std::shared_ptr<TransformComponent> transformComponent = nullptr;
-	std::shared_ptr<CollisionComponent> collisionComponent = nullptr;
-	std::shared_ptr<LifespanComponent> lifespanComponent = nullptr;
+	template <typename T>
+	T& getComponent() { return std::get<T>(components); }
+
+	template <typename T>
+	void removeComponent() { getComponent<T>() = T(); }
 
 	bool isAlive() ;
 	size_t getId() ;
@@ -33,6 +45,7 @@ private:
 	bool isActive=true; // alive or dead
 	size_t id=0; // identifier
 	std::string tag = "default"; // entity type
+	ComponentTable components;
 
 	Entity(const size_t id, const std::string& tag);
 };

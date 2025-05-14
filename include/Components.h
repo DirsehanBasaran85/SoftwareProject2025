@@ -5,11 +5,14 @@
 // for position, velocity, angle
 class TransformComponent {
 public:
-	TransformComponent(sf::Vector2f& pos, sf::Vector2f& vel, float& ang) 
-		: position(pos), velocity(vel), angle(ang) {}
+	TransformComponent() = default;
+	TransformComponent(sf::Vector2f& pos, sf::Vector2f& vel,sf::Vector2f& sc, float& ang) 
+		: previousPosition(pos),position(pos), velocity(vel),scale(sc), angle(ang) {}
 
 	bool exists = false;
+	sf::Vector2f previousPosition = { 0.0f,0.0f };
 	sf::Vector2f position = { 0.0f,0.0f };
+	sf::Vector2f scale = { 1.0f,1.0f };
 	sf::Vector2f velocity = { 0.0f,0.0f };
 	float angle = 0.0f;
 };
@@ -24,19 +27,20 @@ public:
 //	int score = 0;
 //};
 
-class CollisionComponent {
+class CollisionComponent { // bounding box
 public:
-	CollisionComponent(float aabbsize,sf::Vector2f aabbposition,sf::Vector2f aabboffset)
-		: aabbSize(aabbsize),aabbPosition(aabbposition),aabbOffset(aabboffset){}
+	CollisionComponent() = default;
+	CollisionComponent(const sf::Vector2f& s)
+		: size(s),halfSize(s.x/2,s.y/2){}
 	bool exists = false;
-	float aabbSize;
-	sf::Vector2f aabbPosition;
-	sf::Vector2f aabbOffset;
+	sf::Vector2f size;
+	sf::Vector2f halfSize;
 
 };
 
 class LifespanComponent {
 public:
+	LifespanComponent() = default;
 	LifespanComponent(int lt,int rlt) 
 		: lifetime(lt), remainingLifetime(rlt){}
 	bool exists = false;

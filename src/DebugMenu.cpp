@@ -36,6 +36,7 @@ void DebugMenu::Update(Scene& scene) {
         ImGui::Text("FPS: %.1f", ImGui::GetIO().Framerate);
         sf::Vector2f pos_apple = scene.getPosition("apple");
         ImGui::Text("local x: %f local y: %f", pos_apple.x, pos_apple.y);
+        ImGui::Checkbox("Show AABB", &showCollisions);
         ImGui::EndTabItem();
     }
     /*  if (ImGui::BeginTabItem("Test"))
