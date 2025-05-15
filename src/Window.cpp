@@ -21,10 +21,10 @@ void Window::run() {
     assetManager.loadSprite("apple", tex, { 0,0 }, { 32,32 });
     assetManager.loadSprite("goomba", tex, { 32,32 }, { 32,32 });
 
-    scene.gsystem.addEntity("apple", { 570,400 });
-    scene.gsystem.addEntity("goomba", { 300,300 });
+    scene.em.addInitializedEntityByTag("apple", { 570,400 });
+    scene.em.addInitializedEntityByTag("goomba", { 300,300 });
 
-    scene.gsystem.update();
+    scene.em.Update();
 
     // Bind actions
     input.bindAction("MoveUp", { InputType::Keyboard, {.key = sf::Keyboard::Scan::Up} });
@@ -44,27 +44,27 @@ void Window::createWindow() {
 void Window::checkInput() {
 
     if (input.isActionDown("MoveUp")) {
-        sf::Vector2f coordinates = scene.gsystem.getPosition("apple");
+        sf::Vector2f coordinates = scene.em.getFirstEntityPosByTag("apple");
         coordinates.y -= 1;
-        scene.gsystem.setPosition("apple", coordinates);
+        scene.em.setEntityPosByTag("apple", coordinates);
     }
 
     if (input.isActionDown("MoveDown")) {
-        sf::Vector2f coordinates = scene.gsystem.getPosition("apple");
+        sf::Vector2f coordinates = scene.em.getFirstEntityPosByTag("apple");
         coordinates.y += 1;
-        scene.gsystem.setPosition("apple", coordinates);
+        scene.em.setEntityPosByTag("apple", coordinates);
     }
 
     if (input.isActionDown("MoveRight")) {
-        sf::Vector2f coordinates = scene.gsystem.getPosition("apple");
+        sf::Vector2f coordinates = scene.em.getFirstEntityPosByTag("apple");
         coordinates.x += 1;
-        scene.gsystem.setPosition("apple", coordinates);
+        scene.em.setEntityPosByTag("apple", coordinates);
     }
 
     if (input.isActionDown("MoveLeft")) {
-        sf::Vector2f coordinates = scene.gsystem.getPosition("apple");
+        sf::Vector2f coordinates = scene.em.getFirstEntityPosByTag("apple");
         coordinates.x -= 1;
-        scene.gsystem.setPosition("apple", coordinates);
+        scene.em.setEntityPosByTag("apple", coordinates);
     }
 
 }
@@ -90,8 +90,8 @@ void Window::windowLoop() {
         checkInput();
 
         //example collision usage
-        auto apple = scene.gsystem.getEntityByName("apple");
-        auto goomba = scene.gsystem.getEntityByName("goomba");
+        auto apple = scene.em.getFirstEntityByTag("apple");
+        auto goomba = scene.em.getFirstEntityByTag("goomba");
         scene.csystem.resolveCollision(apple, goomba);
 
         renderer.render();

@@ -7,7 +7,7 @@
 class Sprite {
 
 public:
-    
+
     Sprite(const sf::Texture& texture, sf::Vector2u position = { 0, 0 }, sf::Vector2u size = { 0, 0 });
     ~Sprite();
 
@@ -20,7 +20,7 @@ public:
 
     const sf::Sprite& getRaw() const;
 private:
-    
+
     sf::Sprite sprite;
 };
 

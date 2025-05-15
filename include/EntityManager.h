@@ -15,11 +15,17 @@ class EntityManager {
 public:
 	EntityManager();
 	void Update();
-	EntityPtr addEntity(const std::string& tag);
+	EntityPtr addEntityByTag(const std::string& tag);
+	EntityPtr addInitializedEntityByTag(const std::string& tag, sf::Vector2f position);
 	EntityVec& getEntities();
-	EntityVec& getEntities(const std::string& tag);
+	EntityVec& getEntitiesByTag(const std::string& tag);
 	EntityMap& getEntityMap();
+	EntityPtr getFirstEntityByTag(const std::string& tag);
+	sf::Vector2f getFirstEntityPosByTag(const std::string& tag);
+	void setEntityPosByTag(const std::string& tag, sf::Vector2f position);
+	void removeEntityByTag(const std::string& tag); // added
 	void removeDeadEntities(EntityVec& entityVec);
+
 
 private:
 	EntityVec entities;

@@ -23,7 +23,7 @@ public:
     void drawLine(const sf::Vector2f& p1, const sf::Vector2f& p2);
     void display();
     const sf::RenderTexture& getRaw() const;
-    GameplaySystem gsystem;
+    EntityManager em;
     CollisionSystem csystem;
 
 private:
