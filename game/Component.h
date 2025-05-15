@@ -13,6 +13,9 @@ public:
 	TransformComponent(sf::Vector2f& pos, sf::Vector2f& vel, sf::Vector2f& sc, float& ang)
 		: previousPosition(pos), position(pos), velocity(vel), scale(sc), angle(ang) {
 	}
+	TransformComponent(const sf::Vector2f& pos, const sf::Vector2f& vel, const sf::Vector2f& sc, const float& ang)
+		: previousPosition(pos), position(pos), velocity(vel), scale(sc), angle(ang) {
+	}
 
 	sf::Vector2f previousPosition = { 0.0f,0.0f };
 	sf::Vector2f position = { 0.0f,0.0f };

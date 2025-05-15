@@ -20,9 +20,11 @@ void Window::run() {
     Texture tex = assetManager.getTexture("appletex");
     assetManager.loadSprite("apple", tex, { 0,0 }, { 32,32 });
     assetManager.loadSprite("goomba", tex, { 32,32 }, { 32,32 });
+    assetManager.loadSprite("test", tex, { 32,32 }, { 32,32 });
 
     scene.em.addInitializedEntityByTag("apple", { 570,400 });
     scene.em.addInitializedEntityByTag("goomba", { 300,300 });
+    scene.em.AddComponents("test");
 
     scene.em.Update();
 
@@ -92,7 +94,9 @@ void Window::windowLoop() {
         //example collision usage
         auto apple = scene.em.getFirstEntityByTag("apple");
         auto goomba = scene.em.getFirstEntityByTag("goomba");
+        auto test = scene.em.getEntityByID(2);
         scene.csystem.resolveCollision(apple, goomba);
+        scene.csystem.resolveCollision(apple, test);
 
         renderer.render();
     }

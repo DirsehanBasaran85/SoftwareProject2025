@@ -24,6 +24,7 @@ EntityPtr EntityManager::addEntityByTag(const std::string& tag) {
 	return entity;
 }
 
+
 EntityPtr EntityManager::addInitializedEntityByTag(const std::string& tag, sf::Vector2f position) { // initialize an entity with no velocity (local player ?)
 	sf::Vector2f velocity = { 0.0f, 0.0f };
 	float angle = 0.0f;
@@ -31,6 +32,14 @@ EntityPtr EntityManager::addInitializedEntityByTag(const std::string& tag, sf::V
 	auto e = addEntityByTag(tag);
 	e->addComponent<TransformComponent>(position, velocity, scale, angle); //= std::make_shared<TransformComponent>(position, velocity, angle); // be careful here if its null game crashes, should probably check or make more secure
 	e->addComponent<CollisionComponent>(sf::Vector2f(32.0f, 32.0f));
+	return e;
+}
+
+EntityPtr EntityManager::AddComponents(const std::string& tag) { // only exists for testing
+	auto e = addEntityByTag(tag);
+	TransformComponent t({ 200,200 }, {0.0f,0.0f}, {1.0f,1.0f}, 0.0f);
+	CollisionComponent c({32.0f,32.0f});
+	AddComponentToEntity(e, t, c); // definition of this is at EntityManager.h
 	return e;
 }
 
@@ -59,6 +68,14 @@ EntityPtr EntityManager::getFirstEntityByTag(const std::string& tag) {
 
 	throw std::runtime_error("Entity '" + tag + "' not found.");
 
+}
+
+EntityPtr EntityManager::getEntityByID(const size_t id) {
+	auto& entityvec = getEntities();
+	for (auto e : entityvec) {
+		if (e->getId() == id) return e;
+	}
+	throw std::runtime_error("Entity id:" + std::to_string(id) + "not found");
 }
 
 sf::Vector2f EntityManager::getFirstEntityPosByTag(const std::string& tag) {
