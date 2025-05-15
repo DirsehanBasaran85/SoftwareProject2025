@@ -16,10 +16,10 @@ void Renderer::renderToScene() {
 
     scene.clear();
 
-    for (const auto& entityPtr : scene.getEntities()) {
+    for (const auto& entityPtr : scene.gsystem.getEntities()) {
 
         const std::string& entityName = entityPtr->getTag();
-        sf::Vector2f position = scene.getPosition(entityName);
+        sf::Vector2f position = scene.gsystem.getPosition(entityName);
 
         Sprite& spriteEntity = assetManager.getSprite(entityName);
         sf::Sprite sprite = spriteEntity.getRaw();

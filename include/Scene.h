@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <string>
 #include "AssetManager.h"
-#include <EntityManager.h>
+#include "../game/Systems.h"
 
 //Rendering texture where sprites are drawn to 
 //think of it as the game world, where everything has a coordinate based on the game world
@@ -23,23 +23,10 @@ public:
     void drawLine(const sf::Vector2f& p1, const sf::Vector2f& p2);
     void display();
     const sf::RenderTexture& getRaw() const;
-
-
-    EntityPtr addEntity(const std::string& tag);
-    EntityPtr addEntity(const std::string& tag, sf::Vector2f position);
-    void removeEntity(const std::string& tag);
-
-    void setPosition(const std::string& tag, sf::Vector2f position);
-    sf::Vector2f getPosition(const std::string& tag);
-
-    EntityVec& getEntities();            // non-const
-    const EntityVec& getEntities() const;      // const
-
-    void update();
+    GameplaySystem gsystem;
+    CollisionSystem csystem;
 
 private:
-
     sf::RenderTexture scene;
-    EntityManager entityManager;
     sf::Vector2u size;
 };

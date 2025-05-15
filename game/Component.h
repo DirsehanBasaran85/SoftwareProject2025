@@ -1,9 +1,10 @@
 #pragma once
-<<<<<<<< HEAD:game/Component.h
-#include "ComponentBase.h"
-========
-#include "Component.h"
->>>>>>>> 428ed0e8a2b309c89bb2b011bdc07fe74421a3c0:game/Components.h
+#include <SFML/Graphics.hpp>
+
+class Component {
+public:
+	bool exists = false;
+};
 
 // for position, velocity, angle
 class TransformComponent : public Component {
@@ -13,7 +14,6 @@ public:
 		: previousPosition(pos), position(pos), velocity(vel), scale(sc), angle(ang) {
 	}
 
-	bool exists = false;
 	sf::Vector2f previousPosition = { 0.0f,0.0f };
 	sf::Vector2f position = { 0.0f,0.0f };
 	sf::Vector2f scale = { 1.0f,1.0f };
@@ -37,7 +37,6 @@ public:
 	CollisionComponent(const sf::Vector2f& s)
 		: size(s), halfSize(s.x / 2, s.y / 2) {
 	}
-	bool exists = false;
 	sf::Vector2f size;
 	sf::Vector2f halfSize;
 
@@ -49,7 +48,6 @@ public:
 	LifespanComponent(int lt, int rlt)
 		: lifetime(lt), remainingLifetime(rlt) {
 	}
-	bool exists = false;
 	int lifetime;
 	int remainingLifetime;
 };
