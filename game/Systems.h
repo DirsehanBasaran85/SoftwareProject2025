@@ -14,65 +14,64 @@ public:
 
 class CollisionSystem : System {
 public:
-    sf::Vector2f calculateOverlap(const sf::Vector2f& aPos, const sf::Vector2f& bPos, const sf::Vector2f& aSize, const sf::Vector2f& bSize) {
-        const sf::Vector2f d = { abs(aPos.x - bPos.x), abs(aPos.y - bPos.y) };
-        return { aSize.x / 2 + bSize.x / 2 - d.x, aSize.y / 2 + bSize.y / 2 - d.y };
+    sf::Vector2f calculateOverlap(const sf::Vector2f& aPos, const sf::Vector2f& bPos,
+        const sf::Vector2f& aSize, const sf::Vector2f& bSize) {
+        float ax1 = aPos.x;
+        float ay1 = aPos.y;
+        float ax2 = ax1 + aSize.x;
+        float ay2 = ay1 + aSize.y;
+
+        float bx1 = bPos.x;
+        float by1 = bPos.y;
+        float bx2 = bx1 + bSize.x;
+        float by2 = by1 + bSize.y;
+
+        float overlapX = std::min(ax2, bx2) - std::max(ax1, bx1);
+        float overlapY = std::min(ay2, by2) - std::max(ay1, by1);
+
+        return { overlapX, overlapY }; // Can be negative if not overlapping
     }
 
-    /*
-           Overlap if diff > 0, No overlap if diff < 0
-           diff = [abs(x1-x2), abs(y1-y2)]
-           overlapX = (w1/2) + (w2/2) - diff.x
-           overlapY = (h1/2) + (h2/2) - diff.y
-           overlap = [overlapX, overlapY]
-     */
     sf::Vector2f getOverLap(std::shared_ptr<Entity>& a, std::shared_ptr<Entity>& b) {
         const auto& aPos = a->getComponent<TransformComponent>().position;
         const auto& bPos = b->getComponent<TransformComponent>().position;
-        const auto& aSize = a->getComponent<CollisionComponent>().size; // width/height
+        const auto& aSize = a->getComponent<CollisionComponent>().size;
         const auto& bSize = b->getComponent<CollisionComponent>().size;
         return calculateOverlap(aPos, bPos, aSize, bSize);
     }
 
-    /*
-           Overlap.y > 0
-           Movement from left or right side
-           if pos.x > prevPos.x - from left
-           if pos.x < prevPos.x - from right
-
-     */
     sf::Vector2f getPreviouslyOverlap(std::shared_ptr<Entity>& a, std::shared_ptr<Entity>& b) {
         const auto& aPos = a->getComponent<TransformComponent>().previousPosition;
         const auto& bPos = b->getComponent<TransformComponent>().previousPosition;
-        const auto& aSize = a->getComponent<CollisionComponent>().size; // width/height
+        const auto& aSize = a->getComponent<CollisionComponent>().size;
         const auto& bSize = b->getComponent<CollisionComponent>().size;
         return calculateOverlap(aPos, bPos, aSize, bSize);
     }
 
-    //this exists for testing only 
     void resolveCollision(std::shared_ptr<Entity>& a, std::shared_ptr<Entity>& b) {
         auto& aTransform = a->getComponent<TransformComponent>();
         auto& bTransform = b->getComponent<TransformComponent>();
         const auto& aSize = a->getComponent<CollisionComponent>().size;
         const auto& bSize = b->getComponent<CollisionComponent>().size;
 
-        sf::Vector2f delta = aTransform.position - bTransform.position;
-        sf::Vector2f overlap = calculateOverlap(aTransform.position, bTransform.position, aSize, bSize);
+        sf::Vector2f aPos = aTransform.position;
+        sf::Vector2f bPos = bTransform.position;
 
-        // No overlap: do nothing
+        sf::Vector2f delta = (aPos + aSize * 0.5f) - (bPos + bSize * 0.5f); // Center-to-center
+        sf::Vector2f overlap = calculateOverlap(aPos, bPos, aSize, bSize);
+
         if (overlap.x <= 0.f || overlap.y <= 0.f)
             return;
 
-        // Resolve by the smallest axis
         if (overlap.x < overlap.y) {
-            // Push on X axis
+            // Resolve X axis
             if (delta.x > 0)
                 aTransform.position.x += overlap.x;
             else
                 aTransform.position.x -= overlap.x;
         }
         else {
-            // Push on Y axis
+            // Resolve Y axis
             if (delta.y > 0)
                 aTransform.position.y += overlap.y;
             else

@@ -38,7 +38,7 @@ EntityPtr EntityManager::addInitializedEntityByTag(const std::string& tag, sf::V
 EntityPtr EntityManager::AddComponents(const std::string& tag) { // only exists for testing
 	auto e = addEntityByTag(tag);
 	TransformComponent t({ 200,200 }, {0.0f,0.0f}, {1.0f,1.0f}, 0.0f);
-	CollisionComponent c({32.0f,32.0f});
+	CollisionComponent c({64.0f,64.0f});
 	AddComponentToEntity(e, t, c); // definition of this is at EntityManager.h
 	return e;
 }
