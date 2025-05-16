@@ -1,43 +1,37 @@
 #pragma once
 
-#include <string>
-#include <iostream>
-#include <optional>
-
 #include <SFML/Graphics.hpp>
+#include <optional>
+#include <string>
 
 #include "Renderer.h"
 #include "InputManager.h"
-
-//System that handles window operations and also event handling later
+#include "AssetManager.h"
+#include "Scene.h"
 
 class Window {
-
 public:
-   
     Window(unsigned int width = 800, unsigned int height = 600, const std::string& title = "Default");
     ~Window();
 
-    void run();
+    void pollEvents();      // process input events
+    void update();          // logic like input & game updates
+    void render();          // calls renderer
 
-    inline bool isOpen() const { return window.isOpen(); }
-    inline void clear(sf::Color color = sf::Color::Black) { window.clear(color); }
-    inline void display() { window.display(); }
-    inline void close() { window.close(); }
+    bool isOpen() const;
+    void close();
+
 private:
-    
     sf::RenderWindow window;
-
     unsigned int width;
     unsigned int height;
     const std::string title;
-    
+
     InputManager input;
     AssetManager assetManager;
     Scene scene;
     Renderer renderer;
 
     void createWindow();
-    void checkInput();
-    void windowLoop();
+    void processInput();
 };

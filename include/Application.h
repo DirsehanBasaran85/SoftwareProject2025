@@ -3,7 +3,7 @@
 #include <memory>
 #include <string>
 
-#include "Window.h"
+#include "Game.h"
 
 //Core of the program controls System initialization and how Systems are processed
 
@@ -19,5 +19,5 @@ public:
 
 private:
     bool running;
-    Window window;
+    std::unique_ptr<Game> game;
 };

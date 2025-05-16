@@ -1,5 +1,5 @@
 #include "Texture.h"
-
+#include <iostream>
 Texture::Texture() {
 
 }
@@ -47,6 +47,7 @@ bool Texture::loadFromFile(
     
     if (!texture.loadFromFile(filename.string())) {
         return false;
+        std::cout << "failed to load\n";
     }
     texture.setRepeated(false);
     texture.setSmooth(false);
