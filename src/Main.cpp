@@ -1,5 +1,4 @@
 #include "Application.h"
-#include "Window.h"
 #include <SFML/Graphics.hpp>
 
 int main() {

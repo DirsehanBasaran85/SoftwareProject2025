@@ -1,6 +1,5 @@
 #pragma once 
 #include "EntityManager.h"
-#include "Scene.h"
 #include "imgui.h"
 #include "imgui-SFML.h"
 #include <SFML/Graphics.hpp>
@@ -9,8 +8,7 @@
 class DebugMenu {
 private:
 
-	sf::RenderWindow* window;
-	Scene* scene;
+	sf::RenderWindow* window = nullptr;
 	sf::Clock deltaClock;
 	
 public:
@@ -23,8 +21,8 @@ public:
 	bool IsMenuActive = true;
 	bool showCollisions = true;
 	bool Init(sf::RenderWindow* _window);
-	void Update(Scene& scene);
+	void Update(EntityManager& em);
 	void Render();
-	void ProcessEvent(sf::Event event);
+	void ProcessEvent(const sf::Event& event);
 
 };

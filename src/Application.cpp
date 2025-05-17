@@ -1,5 +1,4 @@
 #include "Application.h"
-#include "Window.h"
 
 Application::Application()
     : game(std::make_unique<Game>()), running(true) {

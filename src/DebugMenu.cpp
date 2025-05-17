@@ -27,14 +27,14 @@ bool DebugMenu::Init(sf::RenderWindow* _window) {
   
 }
 // todo add entity logic
-void DebugMenu::Update(Scene& scene) {
+void DebugMenu::Update(EntityManager& em) {
     ImGui::SFML::Update(*window, deltaClock.restart()); // new imgui frame
     ImGui::Begin("Debug Info");
     ImGui::BeginTabBar("FirstTabBar", ImGuiTabBarFlags_None);
     if (ImGui::BeginTabItem("Stats"))
     {
         ImGui::Text("FPS: %.1f", ImGui::GetIO().Framerate);
-        sf::Vector2f pos_apple = scene.em.getFirstEntityPosByTag("apple");
+        sf::Vector2f pos_apple = em.getFirstEntityPosByTag("apple");
         ImGui::Text("local x: %f local y: %f", pos_apple.x, pos_apple.y);
         ImGui::Checkbox("Show AABB", &showCollisions);
         ImGui::EndTabItem();
@@ -71,6 +71,6 @@ void DebugMenu::Render() {
 	ImGui::SFML::Render(*window);
 }
 
-void DebugMenu::ProcessEvent(sf::Event event) {
+void DebugMenu::ProcessEvent(const sf::Event& event) {
 	ImGui::SFML::ProcessEvent(*window, event);
 }
