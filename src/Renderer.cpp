@@ -30,7 +30,7 @@ void Renderer::renderToScene() {
                 rect.setPosition(sf::Vector2f(tc.position.x, tc.position.y));
                 rect.setFillColor(sf::Color(0, 0, 0, 0));
                 rect.setOutlineColor(sf::Color(255, 255, 255, 255));
-                rect.setOutlineThickness(0.55);
+                rect.setOutlineThickness(-1.0f);
                 scene.draw(rect);
             }
         }
