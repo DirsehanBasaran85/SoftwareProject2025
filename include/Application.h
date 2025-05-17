@@ -20,4 +20,5 @@ public:
 private:
     bool running;
     std::unique_ptr<Game> game;
+    std::unique_ptr<Window> window;
 };

@@ -1,34 +1,25 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include "InputManager.h"
-#include "AssetManager.h"
-#include "Scene.h"
-#include "Renderer.h"
+#include "Window.h"
 #include "EntityManager.h"
 #include "Systems.h"
 
 class Game {
 public:
-    Game(unsigned int width = 1200, unsigned int height = 800, const std::string& title = "test");
+    Game();
     ~Game();
 
     void runFrame();
     bool isRunning() const;
 
+    EntityManager& getEntityManager();
+    void attachWindow(Window* w); // to be called after both game and window are constructed
+
 private:
-    void processInput();
     void update();
-    void render();
-    void pollEvents();
 
-    sf::RenderWindow window;
-    InputManager input;
-    AssetManager assetManager;
-    Scene scene;
-    Renderer renderer;
     EntityManager entityManager;
+    Window* window = nullptr; // reference set with attachWindow
     CollisionSystem collisionSystem;
-
-    bool running;
+    bool running = true;
 };

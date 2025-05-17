@@ -1,7 +1,7 @@
 #pragma once
 #include "EntityManager.h"
 #include <SFML/Graphics.hpp>
-
+//#include <iostream>
 
 class System {
 protected:
@@ -59,10 +59,9 @@ public:
 
         sf::Vector2f delta = (aPos + aSize * 0.5f) - (bPos + bSize * 0.5f); // Center-to-center
         sf::Vector2f overlap = calculateOverlap(aPos, bPos, aSize, bSize);
-
+        //std::cout << "x overlap: " << overlap.x << " y overlap: " << overlap.y << std::endl;
         if (overlap.x <= 0.f || overlap.y <= 0.f)
             return;
-
         if (overlap.x < overlap.y) {
             // Resolve X axis
             if (delta.x > 0)

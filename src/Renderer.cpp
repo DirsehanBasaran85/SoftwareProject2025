@@ -16,7 +16,6 @@ void Renderer::renderToScene() {
     for (const auto& entityPtr : em.getEntities()) {
         const std::string& entityName = entityPtr->getTag();
         sf::Vector2f position = em.getFirstEntityPosByTag(entityName);
-
         Sprite& spriteEntity = assetManager.getSprite(entityName);
         sf::Sprite sprite = spriteEntity.getRaw();
         sprite.setPosition(position);
@@ -31,14 +30,13 @@ void Renderer::renderToScene() {
                 rect.setPosition(sf::Vector2f(tc.position.x, tc.position.y));
                 rect.setFillColor(sf::Color(0, 0, 0, 0));
                 rect.setOutlineColor(sf::Color(255, 255, 255, 255));
-                rect.setOutlineThickness(1);
+                rect.setOutlineThickness(0.55);
                 scene.draw(rect);
             }
         }
 
         scene.draw(sprite);
     }
-
     debugMenu.Update(em);
     scene.display();
 }
