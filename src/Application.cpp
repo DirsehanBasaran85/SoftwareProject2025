@@ -12,8 +12,11 @@ Application::~Application() {
 
 
 void Application::processSystems() {
-    if (game->isRunning()) {
-        game->runFrame();
+    if (game->isRunning() && window->isOpen()) {
+
+        window->pollEvents();
+        game->update();
+        window->render();
     }
     else {
         shutdown();

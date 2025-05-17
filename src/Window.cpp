@@ -21,12 +21,6 @@ Window::Window(unsigned int width, unsigned int height, const std::string& title
     assetManager.loadSprite("goomba", tex, { 32,32 }, { 32,32 });
     assetManager.loadSprite("test", tex, { 32,32 }, { 32,32 });
 
-    // add entities
-    em.addInitializedEntityByTag("apple", { 570,400 });
-    em.addInitializedEntityByTag("goomba", { 300,300 });
-    em.AddComponents("test");
-    em.Update();
-
     // bind controls
     input.bindAction("MoveUp", { InputType::Keyboard, {.key = sf::Keyboard::Scan::Up} });
     input.bindAction("MoveDown", { InputType::Keyboard, {.key = sf::Keyboard::Scan::Down} });
@@ -35,6 +29,11 @@ Window::Window(unsigned int width, unsigned int height, const std::string& title
 }
 
 Window::~Window() {}
+
+bool Window::isOpen() {
+
+    return window.isOpen();
+}
 
 void Window::pollEvents() {
     input.beginFrame();
@@ -55,13 +54,8 @@ void Window::processInput(EntityManager& em) {
     em.setEntityPosByTag("apple", pos);
 }
 
-void Window::render(EntityManager& em) {
-    renderer.renderToScene();
-    window.clear();
-    sf::Sprite sceneSprite(scene.getScene());
-    window.draw(sceneSprite);
-    renderer.getDebugMenu().Render();
-    window.display();
+void Window::render() {
+    renderer.render();
 }
 
 sf::RenderWindow& Window::getRenderWindow() { return window; }

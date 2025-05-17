@@ -1,7 +1,14 @@
 #include "Game.h"
 #include <iostream>
 
-Game::Game() : running(true) {}
+Game::Game() : running(true) {
+
+    entityManager.addInitializedEntityByTag("apple", { 570,400 });
+    entityManager.addInitializedEntityByTag("goomba", { 300,300 });
+    entityManager.AddComponents("test");
+    entityManager.Update();
+
+}
 
 Game::~Game() {}
 
@@ -24,17 +31,6 @@ void Game::update() {
     collisionSystem.resolveCollision(apple, test);
 
     entityManager.Update();
-}
-
-void Game::runFrame() {
-    if (window->getRenderWindow().isOpen()) {
-        window->pollEvents();
-        update();
-        window->render(entityManager);
-    }
-    else {
-        running = false;
-    }
 }
 
 bool Game::isRunning() const {

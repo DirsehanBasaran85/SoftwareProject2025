@@ -14,9 +14,10 @@ public:
     Window(unsigned int width, unsigned int height, const std::string& title, EntityManager& em);
     ~Window();
 
+    bool isOpen();
     void pollEvents();
     void processInput(EntityManager& em);
-    void render(EntityManager& em);
+    void render();
 
     sf::RenderWindow& getRenderWindow();
     InputManager& getInputManager();

@@ -9,14 +9,13 @@ public:
     Game();
     ~Game();
 
-    void runFrame();
     bool isRunning() const;
 
     EntityManager& getEntityManager();
     void attachWindow(Window* w); // to be called after both game and window are constructed
 
-private:
     void update();
+private:
 
     EntityManager entityManager;
     Window* window = nullptr; // reference set with attachWindow
