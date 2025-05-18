@@ -14,13 +14,13 @@ Application::~Application() {}
 void Application::run() {
     if (world->isRunning() && window->isOpen()) {
 
-        window->pollEvents();
-        world->update();
-        game->update();
-        window->render();
+        window->pollEvents(); //window events
+        world->update(); // run systems here
+        game->update(); // run game specific unique code here also do your test code here
+        window->render(); // render stuff
     }
     else {
-        game->shutdown();
+        game->shutdown(); // maybe for saving before ending the program
         shutdown();
     }
 }
