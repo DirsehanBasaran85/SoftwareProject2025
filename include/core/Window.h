@@ -16,7 +16,6 @@ public:
 
     bool isOpen();
     void pollEvents();
-    void processInput(EntityManager& em);
     void render();
 
     sf::RenderWindow& getRenderWindow();
