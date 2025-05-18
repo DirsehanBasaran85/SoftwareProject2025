@@ -18,7 +18,7 @@ public:
 private:
 
     EntityManager entityManager;
-    InputManager input;
+    InputManager inputManager;
     CollisionSystem collisionSystem;
     bool running = true;
 };

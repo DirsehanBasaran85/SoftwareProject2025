@@ -12,7 +12,7 @@ EntityManager& World::getEntityManager() {
 }
 
 InputManager& World::getInputManager() {
-    return input;
+    return inputManager;
 }
 
 void World::update() {
