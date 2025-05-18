@@ -2,7 +2,7 @@
 #include <string>
 #include <tuple>
 #include <memory>
-#include "../game/Component.h"
+#include "Component.h"
 
 
 using ComponentTable = std::tuple<

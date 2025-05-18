@@ -9,7 +9,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED YES)
 
 # Directories
 set(INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
-set(GAME_DIR ${PROJECT_SOURCE_DIR}/game)
+set(CORE_DIR ${INCLUDE_DIR}/core)
+set(ECS_DIR ${INCLUDE_DIR}/ECS)
+set(GRAPHICS_DIR ${INCLUDE_DIR}/graphics)
 set(ASSETS_DIR ${PROJECT_SOURCE_DIR}/assets)
 set(SFML_DIR ${PROJECT_SOURCE_DIR}/thirdparty/SFML-3.0.0/lib/cmake/SFML)
 set(Ogg_DIR ${PROJECT_SOURCE_DIR}/thirdparty/SFML-3.0.0/lib/cmake/Ogg)
@@ -49,7 +51,9 @@ target_sources(${PROJECT_NAME} PRIVATE
 # Include Paths
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${INCLUDE_DIR}
-    ${GAME_DIR}
+    ${CORE_DIR}
+    ${ECS_DIR}
+    ${GRAPHICS_DIR}
     ${IMGUI_DIR}
     ${IMGUI_SFML_DIR}
 )
