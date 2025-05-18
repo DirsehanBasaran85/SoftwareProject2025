@@ -11,9 +11,9 @@ Application::~Application() {}
 
 
 void Application::run() {
+    game->Init(*world);
     if (world->isRunning() && window->isOpen()) {
 
-        game->Init(*world);
         window->pollEvents();
         world->update();
         game->Update(*world);
