@@ -6,8 +6,11 @@
 class TestGame : public GameInterface {
 
 public:
+    explicit TestGame(World& world) : world(world) {
+        init();
+    };
 
-    void Init(World& world) override {
+    void init() override {
         // bind controls
         world.getInputManager().bindAction("MoveUp", {InputType::Keyboard, {.key = sf::Keyboard::Scan::Up}});
         world.getInputManager().bindAction("MoveDown", { InputType::Keyboard, {.key = sf::Keyboard::Scan::Down} });
@@ -21,7 +24,7 @@ public:
 
     }
 
-    void Update(World& world) override {
+    void update() override {
 
         // run game logic here
         sf::Vector2f pos = world.getEntityManager().getFirstEntityPosByTag("apple");
@@ -33,11 +36,12 @@ public:
 
     }
 
-    void Shutdown(World& world) override {
+    void shutdown() override {
         // clean up
     }
 
 private:
+    World& world;
     EntityPtr player; // for quick access maybe
     //std::vector<EntityPtr> enemies; // for quick access maybe
 };

@@ -7,7 +7,7 @@
 class GameInterface {
 
 public:
-    virtual void Init(World& world) = 0;
-    virtual void Update(World& world) = 0;
-    virtual void Shutdown(World& world) = 0;
+    virtual void init() = 0;
+    virtual void update() = 0;
+    virtual void shutdown() = 0;
 };
