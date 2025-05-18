@@ -5,7 +5,9 @@ Application::Application()
       window(std::make_unique<Window>(1200, 800, "Test Window", world->getEntityManager(), world->getInputManager())), 
       game(std::make_unique<TestGame>()),
       running(true)
-{}
+{
+    game->Init(*world);
+}
 
 Application::~Application() {}
 
@@ -13,7 +15,6 @@ Application::~Application() {}
 void Application::run() {
     if (world->isRunning() && window->isOpen()) {
 
-        game->Init(*world);
         window->pollEvents();
         world->update();
         game->Update(*world);

@@ -13,7 +13,7 @@ public:
         world.getInputManager().bindAction("MoveDown", { InputType::Keyboard, {.key = sf::Keyboard::Scan::Down} });
         world.getInputManager().bindAction("MoveRight", { InputType::Keyboard, {.key = sf::Keyboard::Scan::Right} });
         world.getInputManager().bindAction("MoveLeft", { InputType::Keyboard, {.key = sf::Keyboard::Scan::Left} });
-
+        // create entities
         world.getEntityManager().addInitializedEntityByTag("apple", {570,400});
         world.getEntityManager().addInitializedEntityByTag("goomba", { 300,300 });
         world.getEntityManager().AddComponents("test");
