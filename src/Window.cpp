@@ -16,7 +16,7 @@ Window::Window(unsigned int width, unsigned int height, const std::string& title
     }
 
     // load assets
-    assetManager.loadTexture("appletex", "assets/AnimationSheet_Character.png", { 0,0 }, { 256,288 });
+    assetManager.loadTexture("appletex", "assets/tilesetfinal.png", { 0,0 }, { 256,288 });
     Texture& tex = assetManager.getTexture("appletex");
     assetManager.loadSprite("apple", tex, { 0,0 }, { 32,32 });
     assetManager.loadSprite("goomba", tex, { 32,32 }, { 32,32 });
