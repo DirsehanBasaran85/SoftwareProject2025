@@ -12,16 +12,11 @@ Game::Game() : running(true) {
 
 Game::~Game() {}
 
-void Game::attachWindow(Window* w) {
-    window = w;
-}
-
 EntityManager& Game::getEntityManager() {
     return entityManager;
 }
 
 void Game::update() {
-    window->processInput(entityManager);
 
     auto apple = entityManager.getFirstEntityByTag("apple");
     auto goomba = entityManager.getFirstEntityByTag("goomba");

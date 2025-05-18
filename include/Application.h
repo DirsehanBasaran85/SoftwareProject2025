@@ -4,6 +4,7 @@
 #include <string>
 
 #include "Game.h"
+#include "Window.h"
 
 //Core of the program controls System initialization and how Systems are processed
 

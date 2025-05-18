@@ -1,20 +1,18 @@
 #include "Application.h"
 
 Application::Application()
-    : game(std::make_unique<Game>()), running(true)
-{
-    window = std::make_unique<Window>(1200, 800, "Test Window", game->getEntityManager());
-    game->attachWindow(window.get());
-}
+    : game(std::make_unique<Game>()),
+      window(std::make_unique<Window>(1200, 800, "Test Window", game->getEntityManager())), running(true)
+{}
 
-Application::~Application() {
-}
+Application::~Application() {}
 
 
 void Application::processSystems() {
     if (game->isRunning() && window->isOpen()) {
 
         window->pollEvents();
+        window->processInput(game->getEntityManager());
         game->update();
         window->render();
     }
