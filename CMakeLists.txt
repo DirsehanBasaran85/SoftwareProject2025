@@ -13,6 +13,7 @@ set(CORE_DIR ${INCLUDE_DIR}/core)
 set(ECS_DIR ${INCLUDE_DIR}/ECS)
 set(GRAPHICS_DIR ${INCLUDE_DIR}/graphics)
 set(ASSETS_DIR ${PROJECT_SOURCE_DIR}/assets)
+set(GAMES_DIR ${PROJECT_SOURCE_DIR}/games)
 set(SFML_DIR ${PROJECT_SOURCE_DIR}/thirdparty/SFML-3.0.0/lib/cmake/SFML)
 set(Ogg_DIR ${PROJECT_SOURCE_DIR}/thirdparty/SFML-3.0.0/lib/cmake/Ogg)
 set(IMGUI_DIR ${PROJECT_SOURCE_DIR}/thirdparty/imgui)
@@ -54,6 +55,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${CORE_DIR}
     ${ECS_DIR}
     ${GRAPHICS_DIR}
+    ${GAMES_DIR}
     ${IMGUI_DIR}
     ${IMGUI_SFML_DIR}
 )

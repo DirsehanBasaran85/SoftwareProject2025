@@ -11,7 +11,7 @@
 
 class Window {
 public:
-    Window(unsigned int width, unsigned int height, const std::string& title, EntityManager& em);
+    Window(unsigned int width, unsigned int height, const std::string& title, EntityManager& em, InputManager& input);
     ~Window();
 
     bool isOpen();
@@ -26,7 +26,7 @@ public:
 
 private:
     sf::RenderWindow window;
-    InputManager input;
+    InputManager& input;
     AssetManager assetManager;
     Scene scene;
     Renderer renderer;

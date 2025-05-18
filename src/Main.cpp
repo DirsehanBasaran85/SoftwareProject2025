@@ -7,7 +7,7 @@ int main() {
     while (app.isRunning()) {
        
         //Input System, Renderer System, Sound System etc.
-        app.processSystems(); 
+        app.run(); 
     }
 
     return 0;

@@ -1,9 +1,10 @@
 #include "Window.h"
 #include <iostream>
 
-Window::Window(unsigned int width, unsigned int height, const std::string& title, EntityManager& em)
+Window::Window(unsigned int width, unsigned int height, const std::string& title, EntityManager& em, InputManager& input)
     : window(sf::VideoMode({ width, height }), title, sf::Style::Titlebar | sf::Style::Close),
     assetManager(100),
+    input(input),
     scene({ width, height }),
     renderer(window, assetManager, scene, em)
 {
@@ -21,17 +22,11 @@ Window::Window(unsigned int width, unsigned int height, const std::string& title
     assetManager.loadSprite("goomba", tex, { 32,32 }, { 32,32 });
     assetManager.loadSprite("test", tex, { 32,32 }, { 32,32 });
 
-    // bind controls
-    input.bindAction("MoveUp", { InputType::Keyboard, {.key = sf::Keyboard::Scan::Up} });
-    input.bindAction("MoveDown", { InputType::Keyboard, {.key = sf::Keyboard::Scan::Down} });
-    input.bindAction("MoveRight", { InputType::Keyboard, {.key = sf::Keyboard::Scan::Right} });
-    input.bindAction("MoveLeft", { InputType::Keyboard, {.key = sf::Keyboard::Scan::Left} });
 }
 
 Window::~Window() {}
 
 bool Window::isOpen() {
-
     return window.isOpen();
 }
 
@@ -43,15 +38,6 @@ void Window::pollEvents() {
             window.close();
         input.update(*event);
     }
-}
-
-void Window::processInput(EntityManager& em) {
-    sf::Vector2f pos = em.getFirstEntityPosByTag("apple");
-    if (input.isActionDown("MoveUp")) pos.y -= 1;
-    if (input.isActionDown("MoveDown")) pos.y += 1;
-    if (input.isActionDown("MoveRight")) pos.x += 1;
-    if (input.isActionDown("MoveLeft")) pos.x -= 1;
-    em.setEntityPosByTag("apple", pos);
 }
 
 void Window::render() {

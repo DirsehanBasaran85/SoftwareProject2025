@@ -3,8 +3,10 @@
 #include <memory>
 #include <string>
 
-#include "Game.h"
+#include "World.h"
 #include "Window.h"
+#include "testgame.h"
+
 
 //Core of the program controls System initialization and how Systems are processed
 
@@ -14,12 +16,13 @@ public:
     Application();
     ~Application();
 
-    void processSystems();
+    void run();
     void shutdown();
     bool isRunning();
 
 private:
     bool running;
-    std::unique_ptr<Game> game;
+    std::unique_ptr<World> world;
     std::unique_ptr<Window> window;
+    std::unique_ptr<GameInterface> game;
 };

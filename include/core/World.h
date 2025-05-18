@@ -1,21 +1,24 @@
 #pragma once
 
 #include "EntityManager.h"
+#include "InputManager.h"
 #include "Systems.h"
 
-class Game {
+class World {
 public:
-    Game();
-    ~Game();
+    World();
+    ~World();
 
     bool isRunning() const;
 
     EntityManager& getEntityManager();
+    InputManager& getInputManager();
 
     void update();
 private:
 
     EntityManager entityManager;
+    InputManager input;
     CollisionSystem collisionSystem;
     bool running = true;
 };
