@@ -24,7 +24,7 @@ void World::update() {
         system->Update();
     }
     */
-    auto player = entityManager.getFirstEntityByTag("player");
+    auto player = entityManager.getEntityByID(0); // get player
     EntityMap& emap = entityManager.getEntityMap();
     EntityVec& enemies = emap["enemy"];
 

@@ -34,8 +34,8 @@ void DebugMenu::Update(EntityManager& em) {
     if (ImGui::BeginTabItem("Stats"))
     {
         ImGui::Text("FPS: %.1f", ImGui::GetIO().Framerate);
-        sf::Vector2f pos_apple = em.getFirstEntityPosByTag("player");
-        ImGui::Text("local x: %f local y: %f", pos_apple.x, pos_apple.y);
+        sf::Vector2f pos_local = em.getEntityPosByID(0);
+        ImGui::Text("local x: %f local y: %f", pos_local.x, pos_local.y);
         ImGui::Checkbox("Show AABB", &showCollisions);
         ImGui::EndTabItem();
     }

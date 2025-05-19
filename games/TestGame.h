@@ -31,9 +31,9 @@ public:
 
         // create entities
         EntityManager& em = world.getEntityManager();
-        player = em.addEntityByTag("player");
-        enemy = em.addEntityByTag("enemy");
-        EntityPtr enemy2 = em.addEntityByTag("enemy");
+        player = em.addEntityWithTag("player");
+        enemy = em.addEntityWithTag("enemy");
+        EntityPtr enemy2 = em.addEntityWithTag("enemy");
 
         // add components to entities
         em.AddComponentToEntity(player, playertransform, playercollision);
@@ -49,12 +49,12 @@ public:
         InputManager& im = world.getInputManager();
         EntityManager& em = world.getEntityManager();
 
-        sf::Vector2f pos = em.getFirstEntityPosByTag("player");
+        sf::Vector2f pos = em.getEntityPosByID(0); // 0 is the player
         if (im.isActionDown("MoveUp")) pos.y -= 1;
         if (im.isActionDown("MoveDown")) pos.y += 1;
         if (im.isActionDown("MoveRight")) pos.x += 1;
         if (im.isActionDown("MoveLeft")) pos.x -= 1;
-        em.setEntityPosByTag("player", pos);
+        em.setEntityPos(0, pos); // player is the first entity thats added, therefore it has id 0
 
     }
 
