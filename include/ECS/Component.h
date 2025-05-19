@@ -24,6 +24,16 @@ public:
 	float angle = 0.0f;
 };
 
+class SpriteComponent : public Component {
+public:
+	SpriteComponent(const std::string& spritename)
+		: sprite(spritename)
+	{
+	}
+
+	std::string sprite;
+};
+
 // scoreboard
 //class ScoreboardComponent : public Component {
 //public:

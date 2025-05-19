@@ -21,7 +21,9 @@ bool DebugMenu::Init(sf::RenderWindow* _window) {
         ImGuiIO& io = ImGui::GetIO();
         ImFont* customFont = io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\Calibri.ttf", 15);
         io.FontDefault = customFont;
-        ImGui::SFML::UpdateFontTexture();
+        if (!ImGui::SFML::UpdateFontTexture()) {
+            return 0; 
+        }
         return 1;
     }
   
