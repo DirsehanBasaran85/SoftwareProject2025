@@ -24,12 +24,14 @@ void World::update() {
         system->Update();
     }
     */
-    auto apple = entityManager.getFirstEntityByTag("apple");
-    auto goomba = entityManager.getFirstEntityByTag("goomba");
-    auto test = entityManager.getEntityByID(2);
+    auto player = entityManager.getFirstEntityByTag("player");
+    EntityMap& emap = entityManager.getEntityMap();
+    EntityVec& enemies = emap["enemy"];
 
-    collisionSystem.resolveCollision(apple, goomba);
-    collisionSystem.resolveCollision(apple, test);
+    for (auto e : enemies) {
+        collisionSystem.resolveCollision(player, e);
+    }
+    
 
     entityManager.Update();
 }
