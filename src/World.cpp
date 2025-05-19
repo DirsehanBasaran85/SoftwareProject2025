@@ -25,9 +25,13 @@ void World::update() {
     }
     */
     auto player = entityManager.getFirstEntityByTag("player");
-    auto enemy = entityManager.getFirstEntityByTag("enemy");
+    EntityMap& emap = entityManager.getEntityMap();
+    EntityVec& enemies = emap["enemy"];
 
-    collisionSystem.resolveCollision(player, enemy);
+    for (auto e : enemies) {
+        collisionSystem.resolveCollision(player, e);
+    }
+    
 
     entityManager.Update();
 }

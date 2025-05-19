@@ -1,10 +1,11 @@
 #include "Application.h"
 
 Application::Application()
-    : world(std::make_unique<World>()),
-      window(std::make_unique<Window>(1216, 800, "Test Window", world->getEntityManager(), world->getInputManager())), 
-      game(std::make_unique<TestGame>(*world)),
-      running(true)
+    : 
+    world(std::make_unique<World>()),
+    game(std::make_unique<TestGame>(*world)),
+    window(std::make_unique<Window>(1200, 800, "Test Window", world->getEntityManager(), world->getInputManager())),
+    running(true)
 {
 
 }
@@ -15,8 +16,8 @@ void Application::run() {
     if (world->isRunning() && window->isOpen()) {
 
         window->pollEvents(); //window events
-        world->update(); // run systems here
         game->update(); // run game specific unique code here also do your test code here
+        world->update(); // run systems here
         window->render(); // render stuff
     }
     else {

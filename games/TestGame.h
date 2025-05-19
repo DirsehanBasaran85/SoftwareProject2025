@@ -11,40 +11,50 @@ public:
     };
 
     void init() override {
-        
+
         // bind controls
-        world.getInputManager().bindAction("MoveUp", {InputType::Keyboard, {.key = sf::Keyboard::Scan::Up}});
-        world.getInputManager().bindAction("MoveDown", { InputType::Keyboard, {.key = sf::Keyboard::Scan::Down} });
-        world.getInputManager().bindAction("MoveRight", { InputType::Keyboard, {.key = sf::Keyboard::Scan::Right} });
-        world.getInputManager().bindAction("MoveLeft", { InputType::Keyboard, {.key = sf::Keyboard::Scan::Left} });
-        
+        InputManager& im = world.getInputManager();
+        im.bindAction("MoveUp", { InputType::Keyboard, {.key = sf::Keyboard::Scan::Up} });
+        im.bindAction("MoveDown", { InputType::Keyboard, {.key = sf::Keyboard::Scan::Down} });
+        im.bindAction("MoveRight", { InputType::Keyboard, {.key = sf::Keyboard::Scan::Right} });
+        im.bindAction("MoveLeft", { InputType::Keyboard, {.key = sf::Keyboard::Scan::Left} });
+
         // create components
         TransformComponent playertransform({ 200,200 }, { 0.0f,0.0f }, { 1.0f,1.0f }, 0.0f);
         CollisionComponent playercollision({ 32,32 });
 
         TransformComponent enemytransform({ 300,300 }, { 0.0f,0.0f }, { 1.0f,1.0f }, 0.0f);
         CollisionComponent enemycollision({ 32,32 });
-        
+
+        TransformComponent enemy2transform({ 400,400 }, { 0.0f,0.0f }, { 1.0f,1.0f }, 0.0f);
+        CollisionComponent enemy2collision({ 32,32 });
+
         // create entities
-        player = world.getEntityManager().addEntityByTag("player");
-        enemy = world.getEntityManager().addEntityByTag("enemy");
+        EntityManager& em = world.getEntityManager();
+        player = em.addEntityByTag("player");
+        enemy = em.addEntityByTag("enemy");
+        EntityPtr enemy2 = em.addEntityByTag("enemy");
 
         // add components to entities
-        world.getEntityManager().AddComponentToEntity(player, playertransform, playercollision);
-        world.getEntityManager().AddComponentToEntity(enemy, enemytransform, enemycollision);
-        world.getEntityManager().Update();
+        em.AddComponentToEntity(player, playertransform, playercollision);
+        em.AddComponentToEntity(enemy, enemytransform, enemycollision);
+        em.AddComponentToEntity(enemy2, enemy2transform, enemy2collision);
+        em.Update();
 
     }
 
     void update() override {
 
         // run game logic here
-        sf::Vector2f pos = world.getEntityManager().getFirstEntityPosByTag("player");
-        if (world.getInputManager().isActionDown("MoveUp")) pos.y -= 1;
-        if (world.getInputManager().isActionDown("MoveDown")) pos.y += 1;
-        if (world.getInputManager().isActionDown("MoveRight")) pos.x += 1;
-        if (world.getInputManager().isActionDown("MoveLeft")) pos.x -= 1;
-        world.getEntityManager().setEntityPosByTag("player", pos);
+        InputManager& im = world.getInputManager();
+        EntityManager& em = world.getEntityManager();
+
+        sf::Vector2f pos = em.getFirstEntityPosByTag("player");
+        if (im.isActionDown("MoveUp")) pos.y -= 1;
+        if (im.isActionDown("MoveDown")) pos.y += 1;
+        if (im.isActionDown("MoveRight")) pos.x += 1;
+        if (im.isActionDown("MoveLeft")) pos.x -= 1;
+        em.setEntityPosByTag("player", pos);
 
     }
 

@@ -15,7 +15,7 @@ void Renderer::renderToScene() {
 
     for (const auto& entityPtr : em.getEntities()) {
         const std::string& entityName = entityPtr->getTag();
-        sf::Vector2f position = em.getFirstEntityPosByTag(entityName);
+        sf::Vector2f position = entityPtr->getComponent<TransformComponent>().position;
         Sprite& spriteEntity = assetManager.getSprite(entityName);
         sf::Sprite sprite = spriteEntity.getRaw();
         sprite.setPosition(position);
