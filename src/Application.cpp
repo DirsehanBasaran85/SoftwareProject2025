@@ -13,7 +13,7 @@ Application::Application()
 Application::~Application() {}
 
 void Application::run() {
-    if (world->isRunning() && window->isOpen()) {
+    if (world->isRunning() && window->isOpen()) {  
 
         window->pollEvents(); //window events
         game->update(); // run game specific unique code here also do your test code here

@@ -29,7 +29,7 @@ public:
 	EntityPtr getEntityByID(const size_t id);
 	sf::Vector2f getEntityPosByID(const size_t id);
 
-	void setEntityPos(const size_t id, sf::Vector2f pos);
+	void setEntityPosByID(const size_t id, sf::Vector2f pos);
 
 	void removeDeadEntities(EntityVec& entityVec);
 

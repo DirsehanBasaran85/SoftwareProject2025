@@ -52,7 +52,7 @@ sf::Vector2f EntityManager::getEntityPosByID(const size_t id) {
 	return getEntityByID(id).get()->getComponent<TransformComponent>().position;
 }
 
-void EntityManager::setEntityPos(const size_t id, sf::Vector2f pos){
+void EntityManager::setEntityPosByID(const size_t id, sf::Vector2f pos){
 	auto entity = getEntityByID(id);
 	entity->getComponent<TransformComponent>().position = pos;
 

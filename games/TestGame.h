@@ -54,7 +54,7 @@ public:
         if (im.isActionDown("MoveDown")) pos.y += 1;
         if (im.isActionDown("MoveRight")) pos.x += 1;
         if (im.isActionDown("MoveLeft")) pos.x -= 1;
-        em.setEntityPos(0, pos); // player is the first entity thats added, therefore it has id 0
+        em.setEntityPosByID(0, pos); // player is the first entity thats added, therefore it has id 0
 
     }
 

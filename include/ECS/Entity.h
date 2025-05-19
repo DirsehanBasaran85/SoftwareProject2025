@@ -32,7 +32,7 @@ public:
 	template <typename T>
 	void removeComponent() { getComponent<T>() = T(); }
 
-	bool isAlive() ;
+	bool isAlive() ; 
 	size_t getId() ;
 	std::string& getTag() ; 
 	void Deactivate();
