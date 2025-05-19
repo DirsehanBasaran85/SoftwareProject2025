@@ -23,6 +23,6 @@ public:
 private:
     bool running;
     std::unique_ptr<World> world;
-    std::unique_ptr<Window> window;
     std::unique_ptr<GameInterface> game;
+    std::unique_ptr<Window> window;
 };

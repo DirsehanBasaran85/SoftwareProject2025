@@ -2,8 +2,8 @@
 
 Application::Application()
     : world(std::make_unique<World>()),
-      window(std::make_unique<Window>(1200, 800, "Test Window", world->getEntityManager(), world->getInputManager())), 
       game(std::make_unique<TestGame>(*world)),
+      window(std::make_unique<Window>(1200, 800, "Test Window", world->getEntityManager(), world->getInputManager())),
       running(true)
 {
 
