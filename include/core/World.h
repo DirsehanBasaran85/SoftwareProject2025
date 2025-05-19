@@ -3,6 +3,7 @@
 #include "EntityManager.h"
 #include "InputManager.h"
 #include "Systems.h"
+#include "Component.h"
 
 class World {
 public:

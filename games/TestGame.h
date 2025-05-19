@@ -11,15 +11,27 @@ public:
     };
 
     void init() override {
+        
         // bind controls
         world.getInputManager().bindAction("MoveUp", {InputType::Keyboard, {.key = sf::Keyboard::Scan::Up}});
         world.getInputManager().bindAction("MoveDown", { InputType::Keyboard, {.key = sf::Keyboard::Scan::Down} });
         world.getInputManager().bindAction("MoveRight", { InputType::Keyboard, {.key = sf::Keyboard::Scan::Right} });
         world.getInputManager().bindAction("MoveLeft", { InputType::Keyboard, {.key = sf::Keyboard::Scan::Left} });
+        
+        // create components
+        TransformComponent playertransform({ 200,200 }, { 0.0f,0.0f }, { 1.0f,1.0f }, 0.0f);
+        CollisionComponent playercollision({ 32,32 });
+
+        TransformComponent enemytransform({ 300,300 }, { 0.0f,0.0f }, { 1.0f,1.0f }, 0.0f);
+        CollisionComponent enemycollision({ 32,32 });
+        
         // create entities
-        world.getEntityManager().addInitializedEntityByTag("apple", {570,400});
-        world.getEntityManager().addInitializedEntityByTag("goomba", { 300,300 });
-        world.getEntityManager().AddComponents("test");
+        player = world.getEntityManager().addEntityByTag("player");
+        enemy = world.getEntityManager().addEntityByTag("enemy");
+
+        // add components to entities
+        world.getEntityManager().AddComponentToEntity(player, playertransform, playercollision);
+        world.getEntityManager().AddComponentToEntity(enemy, enemytransform, enemycollision);
         world.getEntityManager().Update();
 
     }
@@ -27,12 +39,12 @@ public:
     void update() override {
 
         // run game logic here
-        sf::Vector2f pos = world.getEntityManager().getFirstEntityPosByTag("apple");
+        sf::Vector2f pos = world.getEntityManager().getFirstEntityPosByTag("player");
         if (world.getInputManager().isActionDown("MoveUp")) pos.y -= 1;
         if (world.getInputManager().isActionDown("MoveDown")) pos.y += 1;
         if (world.getInputManager().isActionDown("MoveRight")) pos.x += 1;
         if (world.getInputManager().isActionDown("MoveLeft")) pos.x -= 1;
-        world.getEntityManager().setEntityPosByTag("apple", pos);
+        world.getEntityManager().setEntityPosByTag("player", pos);
 
     }
 
@@ -42,6 +54,7 @@ public:
 
 private:
     World& world;
-    EntityPtr player; // for quick access maybe
+    EntityPtr player;
+    EntityPtr enemy;
     //std::vector<EntityPtr> enemies; // for quick access maybe
 };
