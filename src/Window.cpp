@@ -19,7 +19,7 @@ Window::Window(unsigned int width, unsigned int height, const std::string& title
     assetManager.loadTexture("gametex", "assets/tilesetfinal.png", { 0,0 }, { 256,288 });
     Texture& tex = assetManager.getTexture("gametex");
     assetManager.loadSprite("player", tex, { 0,0 }, { 32,32 });
-    assetManager.loadSprite("enemy", tex, { 32,32 }, { 32,32 });
+    assetManager.loadSprite("enemy", tex, { 0,192 }, { 32,32 });
 
 }
 
