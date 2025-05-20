@@ -18,12 +18,6 @@ InputManager& World::getInputManager() {
 void World::update() {
     //Systems are resolved here not in game
 
-    /*
-    * something like this for all entities that have the required components for the systems
-    for (auto& system : systems) {
-        system->Update();
-    }
-    */
     auto player = entityManager.getEntityByID(0); // get player  
     EntityMap& emap = entityManager.getEntityMap();
     EntityVec& enemies = emap["enemy"];

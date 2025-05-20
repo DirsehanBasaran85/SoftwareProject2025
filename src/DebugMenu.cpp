@@ -41,6 +41,61 @@ void DebugMenu::Update(EntityManager& em) {
         ImGui::Checkbox("Show AABB", &showCollisions);
         ImGui::EndTabItem();
     }
+    if (ImGui::BeginTabItem("Entities")) 
+    {
+        EntityVec entities = em.getEntities();
+        
+        static ImGuiTableFlags flags = ImGuiTableFlags_BordersOuter | ImGuiTableFlags_NoBordersInBody | ImGuiTableFlags_ScrollY;
+
+        if (ImGui::BeginTable("entity_table", 5, flags, ImVec2(0.0f, ImGui::GetTextLineHeightWithSpacing() * 15), 0.0f))
+        {
+            ImGui::TableSetupColumn("ID", ImGuiTableColumnFlags_DefaultSort | ImGuiTableColumnFlags_WidthFixed);
+            ImGui::TableSetupColumn("Tag", ImGuiTableColumnFlags_WidthFixed);
+            ImGui::TableSetupColumn("Alive", ImGuiTableColumnFlags_WidthFixed);
+            ImGui::TableSetupColumn("Position", ImGuiTableColumnFlags_WidthFixed);
+            ImGui::TableSetupColumn("AABB Size", ImGuiTableColumnFlags_WidthStretch);
+            ImGui::TableHeadersRow();
+
+            for (const auto& e : entities)
+            {
+                ImGui::TableNextRow();
+                ImGui::TableSetColumnIndex(0);
+                ImGui::Text("%zu", e->getId());
+
+                ImGui::TableSetColumnIndex(1);
+                ImGui::Text("%s", e->getTag().c_str());
+
+                ImGui::TableSetColumnIndex(2);
+                ImGui::Text("%s", e->isAlive() ? "Yes" : "No");
+
+                ImGui::TableSetColumnIndex(3);
+                if (e->hasComponent<TransformComponent>())
+                {
+                    auto& t = e->getComponent<TransformComponent>();
+                    ImGui::Text("(%.0f, %.0f)", t.position.x, t.position.y);
+                }
+                else
+                {
+                    ImGui::Text("-");
+                }
+
+                ImGui::TableSetColumnIndex(4);
+                if (e->hasComponent<CollisionComponent>())
+                {
+                    auto& c = e->getComponent<CollisionComponent>();
+                    ImGui::Text("(%.0f, %.0f)", c.size.x,c.size.y);
+                }
+                else
+                {
+                    ImGui::Text("-");
+                }
+            }
+
+            ImGui::EndTable();
+        }
+        
+        ImGui::EndTabItem();
+    }
     /*  if (ImGui::BeginTabItem("Test"))
       {
 

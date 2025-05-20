@@ -8,7 +8,8 @@
 using ComponentTable = std::tuple<
 	TransformComponent,
 	CollisionComponent,
-	LifespanComponent
+	LifespanComponent,
+	SpriteComponent
 >;
 
 class Entity {

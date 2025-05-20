@@ -26,6 +26,7 @@ public:
 
 class SpriteComponent : public Component {
 public:
+	SpriteComponent() = default;
 	SpriteComponent(const std::string& spritename)
 		: sprite(spritename)
 	{

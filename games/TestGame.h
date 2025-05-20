@@ -34,13 +34,13 @@ public:
         player = em.addEntityWithTag("player");
         enemy = em.addEntityWithTag("enemy");
         EntityPtr enemy2 = em.addEntityWithTag("enemy");
+      
 
         // add components to entities
         em.AddComponentToEntity(player, playertransform, playercollision);
         em.AddComponentToEntity(enemy, enemytransform, enemycollision);
         em.AddComponentToEntity(enemy2, enemy2transform, enemy2collision);
         em.Update();
-
     }
 
     void update() override {

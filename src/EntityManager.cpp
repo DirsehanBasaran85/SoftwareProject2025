@@ -1,5 +1,5 @@
 #include <EntityManager.h>
-
+#include <iostream>
 EntityManager::EntityManager()
 	: totalEntities(0) {}
 
@@ -42,10 +42,13 @@ EntityMap& EntityManager::getEntityMap() {
 
 EntityPtr EntityManager::getEntityByID(const size_t id) {
 	auto& entityvec = getEntities();
-	for (auto e : entityvec) {
-		if (e->getId() == id) return e;
+	for (const auto& e : entityvec) {
+		if (e->getId() == id)
+			return e;
 	}
-	throw std::runtime_error("Entity id:" + std::to_string(id) + "not found");
+
+	std::cout << "Entity id: " << id << " not found" << std::endl;
+	return nullptr;
 }
 
 sf::Vector2f EntityManager::getEntityPosByID(const size_t id) {
