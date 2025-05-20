@@ -3,7 +3,7 @@
 #include <vector>
 
 
-class  TestGame : public GameInterface {
+class TestGame : public GameInterface {
 
 public:
     explicit TestGame(World& world) : world(world) {
